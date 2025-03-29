@@ -1,20 +1,14 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Clock, MapPin } from 'lucide-react';
-
 const Hero: React.FC = () => {
-  return (
-    <section id="home" className="relative min-h-screen flex items-center">
+  return <section id="home" className="relative min-h-screen flex items-center">
       {/* Background Image */}
       <div className="absolute inset-0 bg-black/50 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: 'url("https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=1740&auto=format&fit=crop")', 
-            filter: 'brightness(0.4)'
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{
+        backgroundImage: 'url("https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=1740&auto=format&fit=crop")',
+        filter: 'brightness(0.4)'
+      }}></div>
       </div>
 
       {/* Content */}
@@ -28,17 +22,14 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <Button 
-              className="bg-doner-red hover:bg-doner-red/80 text-white text-lg py-6 px-8"
-              onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <Button className="bg-doner-red hover:bg-doner-red/80 text-white text-lg py-6 px-8" onClick={() => document.getElementById('menu')?.scrollIntoView({
+            behavior: 'smooth'
+          })}>
               Speisekarte ansehen
             </Button>
-            <Button 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/10 text-lg py-6 px-8"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <Button variant="outline" onClick={() => document.getElementById('contact')?.scrollIntoView({
+            behavior: 'smooth'
+          })} className="border-white text-lg py-6 px-8 bg-slate-50 text-red-600">
               Besuchen Sie uns
             </Button>
           </div>
@@ -59,8 +50,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
