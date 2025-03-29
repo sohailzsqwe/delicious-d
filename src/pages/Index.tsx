@@ -1,13 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useEffect } from 'react';
+import Layout from '@/components/Layout';
+import Hero from '@/components/Hero';
+import MenuSection from '@/components/MenuSection';
+import AboutSection from '@/components/AboutSection';
+import ReviewSection from '@/components/ReviewSection';
+import ContactSection from '@/components/ContactSection';
+
+const Index: React.FC = () => {
+  useEffect(() => {
+    // Animation on scroll
+    const animateElements = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (elementPosition < screenPosition) {
+          element.classList.add('opacity-100');
+        }
+      });
+    };
+    
+    // Run once on initial load
+    animateElements();
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', animateElements);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', animateElements);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Layout>
+      <Hero />
+      <MenuSection />
+      <AboutSection />
+      <ReviewSection />
+      <ContactSection />
+    </Layout>
   );
 };
 
