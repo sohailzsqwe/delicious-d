@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,13 +28,24 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // Close mobile menu when route changes
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
-    { name: 'Startseite', href: '#home' },
-    { name: 'Speisekarte', href: '#menu' },
-    { name: 'Über uns', href: '#about' },
-    { name: 'Bewertungen', href: '#reviews' },
-    { name: 'Kontakt', href: '#contact' },
+    { name: 'Startseite', href: '/' },
+    { name: 'Speisekarte', href: '/menu' },
+    { name: 'Über uns', href: '/about' },
+    { name: 'Bewertungen', href: '/reviews' },
+    { name: 'Kontakt', href: '/contact' },
   ];
+
+  const isActive = (path: string) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
 
   return (
     <nav 
@@ -43,9 +56,9 @@ const Navbar: React.FC = () => {
       <div className="container-custom flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <a href="#home" className="text-2xl md:text-3xl font-bold text-doner-red">
+          <Link to="/" className="text-2xl md:text-3xl font-bold text-doner-red">
             Berlin Döner
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Nav */}
@@ -53,12 +66,14 @@ const Navbar: React.FC = () => {
           <ul className="flex space-x-8">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a 
-                  href={link.href}
-                  className="font-medium hover:text-doner-red transition-colors"
+                <Link 
+                  to={link.href}
+                  className={`font-medium transition-colors ${
+                    isActive(link.href) ? 'text-doner-red' : 'hover:text-doner-red'
+                  }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -90,13 +105,14 @@ const Navbar: React.FC = () => {
             <ul className="space-y-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href}
-                    className="block py-2 text-lg font-medium hover:text-doner-red transition-colors"
-                    onClick={toggleMenu}
+                  <Link 
+                    to={link.href}
+                    className={`block py-2 text-lg font-medium transition-colors ${
+                      isActive(link.href) ? 'text-doner-red' : 'hover:text-doner-red'
+                    }`}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li>
