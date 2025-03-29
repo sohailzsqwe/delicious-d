@@ -1,10 +1,9 @@
-
 import React, { useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Utensils, Star, Clock, MapPin } from 'lucide-react';
+import { ChevronRight, Utensils, Star, Clock, MapPin, Phone } from 'lucide-react';
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
